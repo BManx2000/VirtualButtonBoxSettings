@@ -5,8 +5,278 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VirtualButtonBoxSettings"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" SizeToContent="WidthAndHeight"
+        ResizeMode="CanMinimize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Background="DarkGray">
+            <Image x:Name="ReferenceImage" HorizontalAlignment="Center" VerticalAlignment="Center" Height="768" Width="1024" Stretch="Uniform" />
+            <Canvas x:Name="GridCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1024" Height="768"/>
+            <Image x:Name="TextureImage" HorizontalAlignment="Center" Height="768" VerticalAlignment="Center" Width="1024" Stretch="Fill" MouseDown="ImageClicked" />
+            <Canvas x:Name="SelectionCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Height="768" Width="1024">
+                <Rectangle x:Name="SelectionRectangle" Width="100" Height="100" Canvas.Left="100" Canvas.Top="100" Stroke="Yellow" Visibility="Hidden" StrokeThickness="2" />
+            </Canvas>
+        </Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="ProfileSelector" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Profile:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                <Button x:Name="ProfileUpButton" Content="Move Up" Grid.Row="1" Grid.Column="0" Margin="5" Click="ProfileUp"/>
+                <Button x:Name="ProfileDownButton" Content="Move Down" Grid.Row="2" Grid.Column="0" Margin="5" Click="ProfileDown"/>
+                <ComboBox x:Name="ProfileNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" DropDownClosed="ProfileSelected" KeyDown="ProfileNameEnter" LostFocus="ProfileNameDone"/>
+                <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
+                    <Button x:Name="NewProfileButton" Content="New" Click="NewProfile" Margin="5" Grid.Row="0" Grid.Column="0" />
+                    <Button x:Name="DeleteProfileButton" Content="Delete" Click="DeleteProfile" Margin="5" Grid.Row="0" Grid.Column="1" />
+                </UniformGrid>
+            </Grid>
+
+            <Grid x:Name="ProfileControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Button Grid:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                <ComboBox x:Name="GridNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" DropDownClosed="GridSelected" KeyDown="GridNameEnter" LostFocus="GridNameDone"/>
+                <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
+                    <Button x:Name="NewGridButton" Content="New" Click="NewGrid" Margin="5" Grid.Row="0" Grid.Column="0" />
+                    <Button x:Name="DeleteGridButton" Content="Delete" Click="DeleteGrid" Margin="5" Grid.Row="0" Grid.Column="1" />
+                </UniformGrid>
+            </Grid>
+
+            <Grid x:Name="GridControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Width (m)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                <Label Content="Height (m)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                <TextBox x:Name="WidthBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" KeyDown="WidthEnter" LostFocus="WidthDone"/>
+                <TextBox x:Name="HeightBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" KeyDown="HeightEnter" LostFocus="HeightDone"/>
+
+                <Label Content="Grid Width" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+                <Label Content="Grid Height" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                <TextBox x:Name="GridWidthBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" KeyDown="GridWidthEnter" LostFocus="GridWidthDone"/>
+                <TextBox x:Name="GridHeightBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" KeyDown="GridHeightEnter" LostFocus="GridHeightDone"/>
+
+                <Label Content="Lock Position" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" />
+                <CheckBox x:Name="LockPosition" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Click="LockPositionChecked" />
+
+                <Label Content="X (m)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
+                <Label Content="Y (m)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4"/>
+                <Label Content="Z (m)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="4"/>
+                <TextBox x:Name="XBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="5" KeyDown="XEnter" LostFocus="XDone"/>
+                <TextBox x:Name="YBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5" KeyDown="YEnter" LostFocus="YDone"/>
+                <TextBox x:Name="ZBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="5" KeyDown="ZEnter" LostFocus="ZDone"/>
+
+                <Label Content="Pitch" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="6"/>
+                <Label Content="Yaw" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="6"/>
+                <Label Content="Roll" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="6"/>
+                <TextBox x:Name="PitchBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="7" KeyDown="PitchEnter" LostFocus="PitchDone"/>
+                <TextBox x:Name="YawBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="7" KeyDown="YawEnter" LostFocus="YawDone"/>
+                <TextBox x:Name="RollBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="7" KeyDown="RollEnter" LostFocus="RollDone"/>
+
+                <Label Content="Alpha" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="8"/>
+                <Label Content="Outline" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="8"/>
+                <Label Content="Border" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="8"/>
+                <TextBox x:Name="AlphaBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="9" KeyDown="AlphaEnter" LostFocus="AlphaDone"/>
+                <CheckBox x:Name="OutlineBox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="9" Click="OutlineChecked"/>
+                <CheckBox x:Name="BorderBox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="9" Click="BorderChecked"/>
+
+                <Button x:Name="ReferenceButton" Content="Reference Image" Grid.Row="0" Grid.Column="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Click="OpenReference"/>
+                <Button x:Name="ClearReferenceButton" Content="Clear Reference" Grid.Row="1" Grid.Column="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Click="ClearReference"/>
+                <Button x:Name="ToggleGridButton" Content="Toggle Grid" Grid.Row="2" Grid.Column="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Click="ToggleGrid"/>
+            </Grid>
+            
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="NewButtonButton" Content="New Button" Grid.Row="0" Grid.Column="0" Width="100" Margin="5" Click="NewButton" IsEnabled="False"/>
+            <Button x:Name="DeleteButtonButton" Content="Delete Button" Grid.Row="1" Grid.Column="0" Width="100" Margin="5" Click="DeleteButton" IsEnabled="False"/>
+
+            <Grid x:Name="ButtonControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" IsEnabled="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="X" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                <TextBox x:Name="ButtonXBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" KeyDown="ButtonXEnter" LostFocus="ButtonXDone"/>
+
+                <Label Content="Y" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                <TextBox x:Name="ButtonYBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" KeyDown="ButtonYEnter" LostFocus="ButtonYDone"/>
+
+                <Label Content="Width" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                <TextBox x:Name="ButtonWidthBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" KeyDown="ButtonWidthEnter" LostFocus="ButtonWidthDone"/>
+
+                <Label Content="Height" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                <TextBox x:Name="ButtonHeightBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" KeyDown="ButtonHeightEnter" LostFocus="ButtonHeightDone"/>
+
+                <Label Content="Font Size (cm)" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+                <TextBox x:Name="FontSizeBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" KeyDown="FontSizeEnter" LostFocus="FontSizeDone"/>
+
+                <Label Content="Text" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+                <TextBox x:Name="ButtonTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" KeyDown="ButtonTextEnter" LostFocus="ButtonTextDone" AcceptsReturn="True"/>
+
+                <ComboBox x:Name="ButtonTypeBox" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" IsEditable="False" DropDownClosed="ButtonTypeSelected">
+                    <ComboBoxItem Name="Normal">Normal Button</ComboBoxItem>
+                    <ComboBoxItem Name="TwoRotary">Two-Direction Rotary</ComboBoxItem>
+                    <ComboBoxItem Name="MultiRotary">Multi-Position Rotary</ComboBoxItem>
+                </ComboBox>
+
+                <Grid x:Name="KeypressControls" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid x:Name="NormalButtonControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="KeypressLabel" Text="Keypress" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="KeypressButton" Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5" Click="SetKeypress" />
+                    </Grid>
+
+                    <Grid x:Name="RotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Degrees Per Step" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox x:Name="DegreesBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" KeyDown="DegreesEnter" LostFocus="DegreesDone"/>
+
+                        <Grid x:Name="TwoRotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="CWKeypressLabel" Text="Clockwise Keypress" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="0,5,5,5"/>
+                            <Button x:Name="CWKeypressButton" Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5" Click="CWSetKeypress" />
+
+                            <TextBlock x:Name="CCWKeypressLabel" Text="Counterclockwise Keypress" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="0,5,5,5"/>
+                            <Button x:Name="CCWKeypressButton" Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="5" Click="CCWSetKeypress" />
+                        </Grid>
+
+                        <Grid x:Name="MultiRotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Default Position" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox x:Name="DefaultPositionBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" KeyDown="DefaultPositionEnter" LostFocus="DefaultPositionDone"/>
+
+                            <Button x:Name="RotaryPlusButton" Width="50" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1" Grid.Column="0" Click="RotaryPlus"/>
+                            <Button x:Name="RotaryMinusButton" Width="50" Content="Remove" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Click="RotaryMinus"/>
+
+                            <Grid x:Name="MultiRotaryContainer" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Keypress 1" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                                <Button Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1" />
+
+                                <TextBlock Text="Keypress 2" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                                <Button Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
