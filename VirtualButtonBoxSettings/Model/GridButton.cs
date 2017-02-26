@@ -44,6 +44,24 @@ namespace VirtualButtonBoxSettings {
 
         public ButtonGrid parent;
 
+        [OnDeserialized]
+        private void RemoveUnityNulls(StreamingContext c) {
+            if (keypress.keypresses.Count == 0) {
+                keypress = null;
+            }
+            if (cwKeypress.keypresses.Count == 0) {
+                cwKeypress = null;
+            }
+            if (ccwKeypress.keypresses.Count == 0) {
+                ccwKeypress = null;
+            }
+            for (int i = 0; i < multiKeypresses.Count; i++) {
+                if (multiKeypresses[i].keypresses.Count == 0) {
+                    multiKeypresses[i] = null;
+                }
+            }
+        }
+
         public int X {
             get { return this.x; }
             set {
