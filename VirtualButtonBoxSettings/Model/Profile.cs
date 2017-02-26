@@ -16,6 +16,8 @@ namespace VirtualButtonBoxSettings {
         public List<ButtonGrid> grids;
         [DataMember]
         private bool isDefault;
+        [DataMember]
+        private bool hidePointer;
 
         [DataMember]
         public int index;
@@ -33,6 +35,14 @@ namespace VirtualButtonBoxSettings {
                     DeconflictDirectory();
                     Directory.Move(Path.Combine(DirectoryInfo.FolderPath, oldDirectory), Path.Combine(DirectoryInfo.FolderPath, this.directory));
                 }
+                Save();
+            }
+        }
+
+        public bool HidePointer {
+            get { return hidePointer; }
+            set {
+                hidePointer = value;
                 Save();
             }
         }

@@ -183,6 +183,12 @@ namespace VirtualButtonBoxSettings {
                     this.GridNameBox.Items.Add(grid);
                 }
                 this.GridNameBox.SelectedItem = this.ButtonGrid;
+
+                this.ProfileHideControls.IsEnabled = true;
+                this.HidePointerCheckbox.IsChecked = this.Profile.HidePointer;
+            }
+            else {
+                this.ProfileHideControls.IsEnabled = false;
             }
 
             this.ProfileControls.IsEnabled = this.Profile != null;
@@ -914,6 +920,11 @@ namespace VirtualButtonBoxSettings {
 
         private void ToggleGrid(object sender, RoutedEventArgs e) {
             this.GridCanvas.Visibility = this.GridCanvas.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        private void HidePointerChecked(object sender, RoutedEventArgs e) {
+            if(this.Profile == null) { return; }
+            this.Profile.HidePointer = (bool)HidePointerCheckbox.IsChecked;
         }
     }
 }

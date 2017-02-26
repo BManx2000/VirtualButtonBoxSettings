@@ -39,6 +39,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -53,6 +54,17 @@
                     <Button x:Name="NewProfileButton" Content="New" Click="NewProfile" Margin="5" Grid.Row="0" Grid.Column="0" />
                     <Button x:Name="DeleteProfileButton" Content="Delete" Click="DeleteProfile" Margin="5" Grid.Row="0" Grid.Column="1" />
                 </UniformGrid>
+                <Grid x:Name="ProfileHideControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Hide Pointer (DCS)" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" />
+                    <CheckBox x:Name="HidePointerCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HidePointerChecked" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
             </Grid>
 
             <Grid x:Name="ProfileControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
