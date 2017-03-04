@@ -10,7 +10,8 @@ namespace VirtualButtonBoxSettings {
     enum ButtonType {
         Normal,
         TwoDirectionRotary,
-        MultiPositionRotary
+        MultiPositionRotary,
+        ThreeWaySwitch
     }
 
     [DataContract]

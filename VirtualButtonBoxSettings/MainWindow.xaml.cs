@@ -255,6 +255,7 @@ namespace VirtualButtonBoxSettings {
                 this.RotaryControls.Visibility = Visibility.Collapsed;
                 this.TwoRotaryControls.Visibility = Visibility.Collapsed;
                 this.MultiRotaryControls.Visibility = Visibility.Collapsed;
+                this.ThreeSwitchControls.Visibility = Visibility.Collapsed;
             }
             else {
                 this.ButtonXBox.Text = this.CurrentButton.X.ToString();
@@ -270,34 +271,47 @@ namespace VirtualButtonBoxSettings {
                 if(this.CurrentButton.Keypress == null) {
                     this.KeypressLabel.Text = "No Keypress";
                     this.KeypressButton.Content = "Set Key";
+                    this.MidKeypressLabel.Text = "No Keypress";
+                    this.MidKeypressButton.Content = "Set Mid Key";
                 }
                 else {
                     this.KeypressLabel.Text = this.CurrentButton.Keypress.ToString();
                     this.KeypressButton.Content = "Clear Key";
+                    this.MidKeypressLabel.Text = this.CurrentButton.Keypress.ToString();;
+                    this.MidKeypressButton.Content = "Clear Mid Key";
                 }
 
                 if (this.CurrentButton.CWKeypress == null) {
                     this.CWKeypressLabel.Text = "No Keypress";
                     this.CWKeypressButton.Content = "Set CW Key";
+                    this.UpKeypressLabel.Text = "No Keypress";
+                    this.UpKeypressButton.Content = "Set Up Key";
                 }
                 else {
                     this.CWKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString();
                     this.CWKeypressButton.Content = "Clear CW Key";
+                    this.UpKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString(); ;
+                    this.UpKeypressButton.Content = "Clear Up Key";
                 }
 
                 if (this.CurrentButton.CCWKeypress == null) {
                     this.CCWKeypressLabel.Text = "No Keypress";
                     this.CCWKeypressButton.Content = "Set CCW Key";
+                    this.DownKeypressLabel.Text = "No Keypress";
+                    this.DownKeypressButton.Content = "Set Down Key";
                 }
                 else {
                     this.CCWKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString();
                     this.CCWKeypressButton.Content = "Clear CCW Key";
+                    this.DownKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString(); ;
+                    this.DownKeypressButton.Content = "Clear Down Key";
                 }
 
                 this.NormalButtonControls.Visibility = this.CurrentButton.ButtonType == ButtonType.Normal ? Visibility.Visible : Visibility.Collapsed;
-                this.RotaryControls.Visibility = this.CurrentButton.ButtonType != ButtonType.Normal ? Visibility.Visible : Visibility.Collapsed;
+                this.RotaryControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary) ? Visibility.Visible : Visibility.Collapsed;
                 this.TwoRotaryControls.Visibility = this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary ? Visibility.Visible : Visibility.Collapsed;
                 this.MultiRotaryControls.Visibility = this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary ? Visibility.Visible : Visibility.Collapsed;
+                this.ThreeSwitchControls.Visibility = this.CurrentButton.ButtonType == ButtonType.ThreeWaySwitch ? Visibility.Visible : Visibility.Collapsed;
                 this.RotaryMinusButton.IsEnabled = this.CurrentButton.MultiKeypresses.Count > 2;
 
                 this.MultiRotaryContainer.Children.Clear();
@@ -442,7 +456,6 @@ namespace VirtualButtonBoxSettings {
             if (e.Key == Key.Enter) {
                 this.YDone(sender, e);
             }
-            UpdateDisplay();
         }
 
         private void YDone(object sender, RoutedEventArgs e) {
@@ -925,6 +938,39 @@ namespace VirtualButtonBoxSettings {
         private void HidePointerChecked(object sender, RoutedEventArgs e) {
             if(this.Profile == null) { return; }
             this.Profile.HidePointer = (bool)HidePointerCheckbox.IsChecked;
+        }
+
+        private void SetUpKeypress(object sender, RoutedEventArgs e) {
+            if (this.CurrentButton == null) { return; }
+            if (this.CurrentButton.CWKeypress == null) {
+                this.CurrentButton.CWKeypress = GetKeyCombo(this.UpKeypressButton);
+            }
+            else {
+                this.CurrentButton.CWKeypress = null;
+            }
+            UpdateDisplay();
+        }
+
+        private void SetMidKeypress(object sender, RoutedEventArgs e) {
+            if (this.CurrentButton == null) { return; }
+            if (this.CurrentButton.Keypress == null) {
+                this.CurrentButton.Keypress = GetKeyCombo(this.MidKeypressButton);
+            }
+            else {
+                this.CurrentButton.Keypress = null;
+            }
+            UpdateDisplay();
+        }
+
+        private void SetDownKeypress(object sender, RoutedEventArgs e) {
+            if (this.CurrentButton == null) { return; }
+            if (this.CurrentButton.CCWKeypress == null) {
+                this.CurrentButton.CCWKeypress = GetKeyCombo(this.DownKeypressButton);
+            }
+            else {
+                this.CurrentButton.CCWKeypress = null;
+            }
+            UpdateDisplay();
         }
     }
 }

@@ -198,6 +198,7 @@
                     <ComboBoxItem Name="Normal">Normal Button</ComboBoxItem>
                     <ComboBoxItem Name="TwoRotary">Two-Direction Rotary</ComboBoxItem>
                     <ComboBoxItem Name="MultiRotary">Multi-Position Rotary</ComboBoxItem>
+                    <ComboBoxItem Name="ThreeWaySwitch">Three-Way Switch</ComboBoxItem>
                 </ComboBox>
 
                 <Grid x:Name="KeypressControls" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
@@ -221,7 +222,7 @@
                         <Button x:Name="KeypressButton" Content="Set Key" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5" Click="SetKeypress" />
                     </Grid>
 
-                    <Grid x:Name="RotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid x:Name="RotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -286,7 +287,26 @@
                             </Grid>
                         </Grid>
                     </Grid>
+                    <Grid x:Name="ThreeSwitchControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+                        <TextBlock x:Name="UpKeypressLabel" Text="Keypress Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="UpKeypressButton" Content="Set Key Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5" Click="SetUpKeypress" />
+
+                        <TextBlock x:Name="MidKeypressLabel" Text="Keypress Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="MidKeypressButton" Content="Set Key Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="5" Click="SetMidKeypress" />
+
+                        <TextBlock x:Name="DownKeypressLabel" Text="Keypress Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="DownKeypressButton" Content="Set Key Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="5" Click="SetDownKeypress" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
