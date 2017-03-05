@@ -169,6 +169,9 @@ namespace VirtualButtonBoxSettings {
         }
 
         private void UpdateGridDisplay() {
+            this.ProfileNameBox.SelectionChanged -= ProfileSelected;
+            this.GridNameBox.SelectionChanged -= GridSelected;
+
             this.ProfileNameBox.Items.Clear();
             foreach(Profile profile in Profiles.profiles) {
                 this.ProfileNameBox.Items.Add(profile);
@@ -234,9 +237,13 @@ namespace VirtualButtonBoxSettings {
                 this.BorderBox.IsChecked = this.ButtonGrid.Border;
                 this.LockPosition.IsChecked = this.ButtonGrid.Locked;
             }
+
+            this.ProfileNameBox.SelectionChanged += ProfileSelected;
+            this.GridNameBox.SelectionChanged += GridSelected;
         }
 
         private void UpdateButtonDisplay() {
+            this.ButtonTypeBox.SelectionChanged -= ButtonTypeSelected;
             if(this.CurrentButton == null) {
                 this.ButtonXBox.Text = null;
                 this.ButtonYBox.Text = null;
@@ -341,6 +348,7 @@ namespace VirtualButtonBoxSettings {
                     this.MultiRotaryContainer.Children.Add(button);
                 }
             }
+            this.ButtonTypeBox.SelectionChanged += ButtonTypeSelected;
         }
 
         private void UpdateSelectionDisplay() {
@@ -702,7 +710,7 @@ namespace VirtualButtonBoxSettings {
             }
         }
 
-        private void GridSelected(object sender, EventArgs e) {
+        private void GridSelected(object sender, SelectionChangedEventArgs e) {
             this.ButtonGrid = (ButtonGrid)GridNameBox.SelectedItem;
             this.CurrentButton = null;
             this.SelectedX = -1;
@@ -751,8 +759,8 @@ namespace VirtualButtonBoxSettings {
             }
         }
 
-        private void ProfileSelected(object sender, EventArgs e) {
-            if (ProfileNameBox.SelectedItem != this.Profile) {
+        private void ProfileSelected(object sender, SelectionChangedEventArgs e) {
+            if (ProfileNameBox.SelectedItem != this.Profile && ProfileNameBox.SelectedItem != null) {
                 this.Profile = (Profile)ProfileNameBox.SelectedItem;
                 this.ButtonGrid = null;
                 this.CurrentButton = null;
@@ -827,7 +835,7 @@ namespace VirtualButtonBoxSettings {
             UpdateProfileImage();
         }
 
-        private void ButtonTypeSelected(object sender, EventArgs e) {
+        private void ButtonTypeSelected(object sender, SelectionChangedEventArgs e) {
             if(this.CurrentButton == null) { return; }
             ButtonType type = (ButtonType)ButtonTypeBox.SelectedIndex;
             this.CurrentButton.ButtonType = type;

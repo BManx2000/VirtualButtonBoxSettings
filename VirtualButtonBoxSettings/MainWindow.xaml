@@ -49,7 +49,7 @@
                 <Label Content="Profile:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                 <Button x:Name="ProfileUpButton" Content="Move Up" Grid.Row="1" Grid.Column="0" Margin="5" Click="ProfileUp"/>
                 <Button x:Name="ProfileDownButton" Content="Move Down" Grid.Row="2" Grid.Column="0" Margin="5" Click="ProfileDown"/>
-                <ComboBox x:Name="ProfileNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" DropDownClosed="ProfileSelected" KeyDown="ProfileNameEnter" LostFocus="ProfileNameDone"/>
+                <ComboBox x:Name="ProfileNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" SelectionChanged="ProfileSelected" KeyDown="ProfileNameEnter" LostFocus="ProfileNameDone"/>
                 <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
                     <Button x:Name="NewProfileButton" Content="New" Click="NewProfile" Margin="5" Grid.Row="0" Grid.Column="0" />
                     <Button x:Name="DeleteProfileButton" Content="Delete" Click="DeleteProfile" Margin="5" Grid.Row="0" Grid.Column="1" />
@@ -79,7 +79,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Button Grid:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                <ComboBox x:Name="GridNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" DropDownClosed="GridSelected" KeyDown="GridNameEnter" LostFocus="GridNameDone"/>
+                <ComboBox x:Name="GridNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" SelectionChanged="GridSelected" KeyDown="GridNameEnter" LostFocus="GridNameDone"/>
                 <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
                     <Button x:Name="NewGridButton" Content="New" Click="NewGrid" Margin="5" Grid.Row="0" Grid.Column="0" />
                     <Button x:Name="DeleteGridButton" Content="Delete" Click="DeleteGrid" Margin="5" Grid.Row="0" Grid.Column="1" />
@@ -194,7 +194,7 @@
                 <Label Content="Text" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
                 <TextBox x:Name="ButtonTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" KeyDown="ButtonTextEnter" LostFocus="ButtonTextDone" AcceptsReturn="True"/>
 
-                <ComboBox x:Name="ButtonTypeBox" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" IsEditable="False" DropDownClosed="ButtonTypeSelected">
+                <ComboBox x:Name="ButtonTypeBox" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" IsEditable="False" SelectionChanged="ButtonTypeSelected">
                     <ComboBoxItem Name="Normal">Normal Button</ComboBoxItem>
                     <ComboBoxItem Name="TwoRotary">Two-Direction Rotary</ComboBoxItem>
                     <ComboBoxItem Name="MultiRotary">Multi-Position Rotary</ComboBoxItem>
