@@ -56,13 +56,11 @@ namespace VirtualButtonBoxSettings {
 
             double width = this.ButtonGrid.Width*Settings.PixelDensity;
             double height = this.ButtonGrid.Height*Settings.PixelDensity;
-            double scaleFactor = 1;
-            if(width > 1024) {
-                scaleFactor = 1024 / width;
-            }
-            if(height > 768 && 768/height < scaleFactor) {
+            double scaleFactor = 1024 / width;
+            if (768 / height < scaleFactor) {
                 scaleFactor = 768 / height;
             }
+            
             this.TextureImage.Width = (int)(width*scaleFactor);
             this.TextureImage.Height = (int)(height*scaleFactor);
             this.SelectionCanvas.Width = this.TextureImage.Width;
