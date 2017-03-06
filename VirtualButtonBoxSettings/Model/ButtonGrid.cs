@@ -138,7 +138,13 @@ namespace VirtualButtonBoxSettings {
         public double Pitch {
             get { return this.pitch; }
             set {
-                this.pitch = Math.Max(Math.Min(360.0, value), 0);
+                while(value >= 360) {
+                    value -= 360;
+                }
+                while(value < 0) {
+                    value += 360;
+                }
+                this.pitch = value;
                 parent.Save();
             }
         }
@@ -146,7 +152,13 @@ namespace VirtualButtonBoxSettings {
         public double Yaw {
             get { return this.yaw; }
             set {
-                this.yaw = Math.Max(Math.Min(360.0, value), 0);
+                while (value >= 360) {
+                    value -= 360;
+                }
+                while (value < 0) {
+                    value += 360;
+                }
+                this.yaw = value;
                 parent.Save();
             }
         }
@@ -154,7 +166,13 @@ namespace VirtualButtonBoxSettings {
         public double Roll {
             get { return this.roll; }
             set {
-                this.roll = Math.Max(Math.Min(360.0, value), 0);
+                while (value >= 360) {
+                    value -= 360;
+                }
+                while (value < 0) {
+                    value += 360;
+                }
+                this.roll = value;
                 parent.Save();
             }
         }
