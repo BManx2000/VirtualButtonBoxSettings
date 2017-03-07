@@ -199,6 +199,7 @@
                     <ComboBoxItem Name="TwoRotary">Two-Direction Rotary</ComboBoxItem>
                     <ComboBoxItem Name="MultiRotary">Multi-Position Rotary</ComboBoxItem>
                     <ComboBoxItem Name="ThreeWaySwitch">Three-Way Switch</ComboBoxItem>
+                    <ComboBoxItem Name="MultiSwitch">Multi-Position Switch</ComboBoxItem>
                 </ComboBox>
 
                 <Grid x:Name="KeypressControls" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
@@ -232,7 +233,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Degrees Per Step" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                        <Label x:Name="DegreesLabel" Content="Degrees Per Step" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
                         <TextBox x:Name="DegreesBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" KeyDown="DegreesEnter" LostFocus="DegreesDone"/>
 
                         <Grid x:Name="TwoRotaryControls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">

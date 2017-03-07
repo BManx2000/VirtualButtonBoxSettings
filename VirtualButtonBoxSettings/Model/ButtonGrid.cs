@@ -358,7 +358,7 @@ namespace VirtualButtonBoxSettings {
                 int buttonWidth = ((button.X + button.Width) * width) / this.gridWidth - x;
                 int buttonHeight = ((button.Y + button.Height) * height) / this.gridHeight - y;
 
-                if(button.ButtonType == ButtonType.Normal || button.ButtonType == ButtonType.ThreeWaySwitch) {
+                if(button.ButtonType == ButtonType.Normal || button.ButtonType == ButtonType.ThreeWaySwitch || button.ButtonType == ButtonType.MultiPositionSwitch) {
                     graphics.DrawRectangle(pen, x, y, buttonWidth, buttonHeight);
                 }
                 else {

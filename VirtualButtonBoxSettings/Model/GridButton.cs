@@ -11,7 +11,8 @@ namespace VirtualButtonBoxSettings {
         Normal,
         TwoDirectionRotary,
         MultiPositionRotary,
-        ThreeWaySwitch
+        ThreeWaySwitch,
+        MultiPositionSwitch
     }
 
     [DataContract]

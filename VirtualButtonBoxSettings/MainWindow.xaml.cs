@@ -264,7 +264,7 @@ namespace VirtualButtonBoxSettings {
             }
             else {
                 this.ButtonXBox.Text = this.CurrentButton.X.ToString();
-                this.ButtonYBox.Text = this.CurrentButton.Y.ToString(); ;
+                this.ButtonYBox.Text = this.CurrentButton.Y.ToString();
                 this.ButtonWidthBox.Text = this.CurrentButton.Width.ToString();
                 this.ButtonHeightBox.Text = this.CurrentButton.Height.ToString();
                 this.FontSizeBox.Text = (this.CurrentButton.FontSize*100).ToString("0.##");
@@ -282,7 +282,7 @@ namespace VirtualButtonBoxSettings {
                 else {
                     this.KeypressLabel.Text = this.CurrentButton.Keypress.ToString();
                     this.KeypressButton.Content = "Clear Key";
-                    this.MidKeypressLabel.Text = this.CurrentButton.Keypress.ToString();;
+                    this.MidKeypressLabel.Text = this.CurrentButton.Keypress.ToString();
                     this.MidKeypressButton.Content = "Clear Mid Key";
                 }
 
@@ -295,7 +295,7 @@ namespace VirtualButtonBoxSettings {
                 else {
                     this.CWKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString();
                     this.CWKeypressButton.Content = "Clear CW Key";
-                    this.UpKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString(); ;
+                    this.UpKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString();
                     this.UpKeypressButton.Content = "Clear Up Key";
                 }
 
@@ -308,14 +308,16 @@ namespace VirtualButtonBoxSettings {
                 else {
                     this.CCWKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString();
                     this.CCWKeypressButton.Content = "Clear CCW Key";
-                    this.DownKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString(); ;
+                    this.DownKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString();
                     this.DownKeypressButton.Content = "Clear Down Key";
                 }
 
                 this.NormalButtonControls.Visibility = this.CurrentButton.ButtonType == ButtonType.Normal ? Visibility.Visible : Visibility.Collapsed;
-                this.RotaryControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary) ? Visibility.Visible : Visibility.Collapsed;
+                this.RotaryControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionSwitch) ? Visibility.Visible : Visibility.Collapsed;
+                this.DegreesLabel.Visibility = (this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary) ? Visibility.Visible : Visibility.Collapsed;
+                this.DegreesBox.Visibility = this.DegreesLabel.Visibility;
                 this.TwoRotaryControls.Visibility = this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary ? Visibility.Visible : Visibility.Collapsed;
-                this.MultiRotaryControls.Visibility = this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary ? Visibility.Visible : Visibility.Collapsed;
+                this.MultiRotaryControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionSwitch) ? Visibility.Visible : Visibility.Collapsed;
                 this.ThreeSwitchControls.Visibility = this.CurrentButton.ButtonType == ButtonType.ThreeWaySwitch ? Visibility.Visible : Visibility.Collapsed;
                 this.RotaryMinusButton.IsEnabled = this.CurrentButton.MultiKeypresses.Count > 2;
 
