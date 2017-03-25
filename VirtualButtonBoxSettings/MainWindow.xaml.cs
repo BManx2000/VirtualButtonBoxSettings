@@ -316,6 +316,7 @@ namespace VirtualButtonBoxSettings {
                 this.TwoRotaryControls.Visibility = this.CurrentButton.ButtonType == ButtonType.TwoDirectionRotary ? Visibility.Visible : Visibility.Collapsed;
                 this.MultiRotaryControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.MultiPositionRotary || this.CurrentButton.ButtonType == ButtonType.MultiPositionSwitch) ? Visibility.Visible : Visibility.Collapsed;
                 this.ThreeSwitchControls.Visibility = this.CurrentButton.ButtonType == ButtonType.ThreeWaySwitch ? Visibility.Visible : Visibility.Collapsed;
+                this.LeftRightControls.Visibility = (this.CurrentButton.ButtonType == ButtonType.ThreeWaySwitch || this.CurrentButton.ButtonType == ButtonType.MultiPositionSwitch) ? Visibility.Visible : Visibility.Collapsed;
                 this.RotaryMinusButton.IsEnabled = this.CurrentButton.MultiKeypresses.Count > 2;
 
                 this.MultiRotaryContainer.Children.Clear();
