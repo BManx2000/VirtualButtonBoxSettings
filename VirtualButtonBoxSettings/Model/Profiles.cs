@@ -10,7 +10,7 @@ using GDI = System.Drawing;
 using System.ComponentModel;
 
 namespace VirtualButtonBoxSettings {
-    class Profiles {
+    public class Profiles {
         public static List<Profile> profiles;
 
         static Profiles() {

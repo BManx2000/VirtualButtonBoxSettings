@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 namespace VirtualButtonBoxSettings {
-    enum ButtonType {
+    public enum ButtonType {
         Normal,
         TwoDirectionRotary,
         MultiPositionRotary,
@@ -16,7 +16,7 @@ namespace VirtualButtonBoxSettings {
     }
 
     [DataContract]
-    class GridButton {
+    public class GridButton {
         [DataMember]
         private int x;
         [DataMember]
@@ -43,6 +43,8 @@ namespace VirtualButtonBoxSettings {
         private List<KeyCombo> multiKeypresses;
         [DataMember]
         private int defaultKeypress;
+        [DataMember]
+        private bool isLeftRight;
 
         public ButtonGrid parent;
 
@@ -178,6 +180,14 @@ namespace VirtualButtonBoxSettings {
             }
         }
 
+        public bool IsLeftRight {
+            get { return this.isLeftRight; }
+            set {
+                this.isLeftRight = value;
+                parent.parent.Save();
+            }
+        }
+
         public void AddKeypress() {
             this.multiKeypresses.Add(null);
             parent.parent.Save();
@@ -213,6 +223,7 @@ namespace VirtualButtonBoxSettings {
             this.multiKeypresses = new List<KeyCombo>();
             this.multiKeypresses.Add(null);
             this.multiKeypresses.Add(null);
+            this.isLeftRight = false;
         }
 
         public bool CanMoveTo(int x, int y) {

@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Json;
 
 namespace VirtualButtonBoxSettings {
     [DataContract]
-    class KeyCombo {
+    public class KeyCombo {
         [DataMember]
         public List<Keypress> keypresses;
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VirtualButtonBoxSettings"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="WidthAndHeight"
+        Title="Virtual Button Box Profiler" SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
@@ -49,11 +49,14 @@
                 <Label Content="Profile:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                 <Button x:Name="ProfileUpButton" Content="Move Up" Grid.Row="1" Grid.Column="0" Margin="5" Click="ProfileUp"/>
                 <Button x:Name="ProfileDownButton" Content="Move Down" Grid.Row="2" Grid.Column="0" Margin="5" Click="ProfileDown"/>
+                <Button x:Name="SettingsButton" Content="Settings" Grid.Row="3" Grid.Column="0" Margin="5" Click="SettingsClicked"/>
                 <ComboBox x:Name="ProfileNameBox" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsEditable="True" IsTextSearchEnabled="False" SelectionChanged="ProfileSelected" KeyDown="ProfileNameEnter" LostFocus="ProfileNameDone"/>
                 <UniformGrid Rows="1" Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
                     <Button x:Name="NewProfileButton" Content="New" Click="NewProfile" Margin="5" Grid.Row="0" Grid.Column="0" />
                     <Button x:Name="DeleteProfileButton" Content="Delete" Click="DeleteProfile" Margin="5" Grid.Row="0" Grid.Column="1" />
                 </UniformGrid>
+                <Button x:Name="ProfileSettingsButton" Content="Profile Settings" Grid.Row="3" Grid.Column="1" Margin="5" Click="ProfileSettingsClicked"/>
+                <!--
                 <Grid x:Name="ProfileHideControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -65,6 +68,7 @@
                     <Label Content="Hide Pointer (DCS)" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" />
                     <CheckBox x:Name="HidePointerCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HidePointerChecked" Grid.Row="0" Grid.Column="1"/>
                 </Grid>
+                -->
             </Grid>
 
             <Grid x:Name="ProfileControls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
@@ -293,20 +297,24 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="UpKeypressLabel" Text="Keypress Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
-                        <Button x:Name="UpKeypressButton" Content="Set Key Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5" Click="SetUpKeypress" />
+                        <Label Content="Left/Right Switch" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox x:Name="LeftRightCheckbox" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LeftRightChecked" Grid.Row="0" Grid.Column="1"/>
 
-                        <TextBlock x:Name="MidKeypressLabel" Text="Keypress Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
-                        <Button x:Name="MidKeypressButton" Content="Set Key Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="5" Click="SetMidKeypress" />
+                        <TextBlock x:Name="UpKeypressLabel" Text="Keypress Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="UpKeypressButton" Content="Set Key Up" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="5" Click="SetUpKeypress" />
 
-                        <TextBlock x:Name="DownKeypressLabel" Text="Keypress Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
-                        <Button x:Name="DownKeypressButton" Content="Set Key Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="5" Click="SetDownKeypress" />
+                        <TextBlock x:Name="MidKeypressLabel" Text="Keypress Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="MidKeypressButton" Content="Set Key Mid" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="5" Click="SetMidKeypress" />
+
+                        <TextBlock x:Name="DownKeypressLabel" Text="Keypress Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Right" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,5,0"/>
+                        <Button x:Name="DownKeypressButton" Content="Set Key Down" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="5" Click="SetDownKeypress" />
                     </Grid>
                 </Grid>
             </Grid>

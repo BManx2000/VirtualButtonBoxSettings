@@ -177,6 +177,7 @@ namespace VirtualButtonBoxSettings {
                 this.ProfileNameBox.Items.Add(profile);
             }
             this.ProfileNameBox.SelectedItem = this.Profile;
+            this.ProfileSettingsButton.IsEnabled = this.Profile != null;
 
             this.GridNameBox.Items.Clear();
             if (this.Profile != null) {
@@ -184,12 +185,6 @@ namespace VirtualButtonBoxSettings {
                     this.GridNameBox.Items.Add(grid);
                 }
                 this.GridNameBox.SelectedItem = this.ButtonGrid;
-
-                this.ProfileHideControls.IsEnabled = true;
-                this.HidePointerCheckbox.IsChecked = this.Profile.HidePointer;
-            }
-            else {
-                this.ProfileHideControls.IsEnabled = false;
             }
 
             this.ProfileControls.IsEnabled = this.Profile != null;
@@ -255,6 +250,7 @@ namespace VirtualButtonBoxSettings {
                 this.KeypressLabel.Text = "No Keypress";
                 this.DegreesBox.Text = null;
                 this.DefaultPositionBox.Text = null;
+                this.LeftRightCheckbox.IsChecked = false;
 
                 this.NormalButtonControls.Visibility = Visibility.Visible;
                 this.RotaryControls.Visibility = Visibility.Collapsed;
@@ -272,6 +268,7 @@ namespace VirtualButtonBoxSettings {
                 this.ButtonTypeBox.SelectedIndex = (int)this.CurrentButton.ButtonType;
                 this.DegreesBox.Text = this.CurrentButton.RotaryAngle.ToString("0.##");
                 this.DefaultPositionBox.Text = (this.CurrentButton.DefaultKeypress + 1).ToString();
+                this.LeftRightCheckbox.IsChecked = this.CurrentButton.IsLeftRight;
 
                 if(this.CurrentButton.Keypress == null) {
                     this.KeypressLabel.Text = "No Keypress";
@@ -290,26 +287,26 @@ namespace VirtualButtonBoxSettings {
                     this.CWKeypressLabel.Text = "No Keypress";
                     this.CWKeypressButton.Content = "Set CW Key";
                     this.UpKeypressLabel.Text = "No Keypress";
-                    this.UpKeypressButton.Content = "Set Up Key";
+                    this.UpKeypressButton.Content = this.CurrentButton.IsLeftRight ? "Set Right Key" : "Set Up Key";
                 }
                 else {
                     this.CWKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString();
                     this.CWKeypressButton.Content = "Clear CW Key";
                     this.UpKeypressLabel.Text = this.CurrentButton.CWKeypress.ToString();
-                    this.UpKeypressButton.Content = "Clear Up Key";
+                    this.UpKeypressButton.Content = this.CurrentButton.IsLeftRight ? "Clear Right Key" : "Clear Up Key";
                 }
 
                 if (this.CurrentButton.CCWKeypress == null) {
                     this.CCWKeypressLabel.Text = "No Keypress";
                     this.CCWKeypressButton.Content = "Set CCW Key";
                     this.DownKeypressLabel.Text = "No Keypress";
-                    this.DownKeypressButton.Content = "Set Down Key";
+                    this.DownKeypressButton.Content = this.CurrentButton.IsLeftRight ? "Set Left Key" : "Set Down Key";
                 }
                 else {
                     this.CCWKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString();
                     this.CCWKeypressButton.Content = "Clear CCW Key";
                     this.DownKeypressLabel.Text = this.CurrentButton.CCWKeypress.ToString();
-                    this.DownKeypressButton.Content = "Clear Down Key";
+                    this.DownKeypressButton.Content = this.CurrentButton.IsLeftRight ? "Clear Left Key" : "Clear Down Key";
                 }
 
                 this.NormalButtonControls.Visibility = this.CurrentButton.ButtonType == ButtonType.Normal ? Visibility.Visible : Visibility.Collapsed;
@@ -664,6 +661,7 @@ namespace VirtualButtonBoxSettings {
         }
 
         private KeyCombo GetKeyCombo(Button button) {
+            this.IsEnabled = false;
             KeyboardInput.Instance.StartKeyboardInput();
             var dialog = new KeyDialog();
             dialog.Owner = this;
@@ -673,6 +671,7 @@ namespace VirtualButtonBoxSettings {
             KeyCombo keypress = KeyboardInput.Instance.GetNextKey();
             dialog.Close();
             KeyboardInput.Instance.StopKeyboardInput();
+            this.IsEnabled = true;
             button.IsEnabled = true;
             return keypress;
         }
@@ -943,11 +942,6 @@ namespace VirtualButtonBoxSettings {
             this.GridCanvas.Visibility = this.GridCanvas.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
         }
 
-        private void HidePointerChecked(object sender, RoutedEventArgs e) {
-            if(this.Profile == null) { return; }
-            this.Profile.HidePointer = (bool)HidePointerCheckbox.IsChecked;
-        }
-
         private void SetUpKeypress(object sender, RoutedEventArgs e) {
             if (this.CurrentButton == null) { return; }
             if (this.CurrentButton.CWKeypress == null) {
@@ -979,6 +973,27 @@ namespace VirtualButtonBoxSettings {
                 this.CurrentButton.CCWKeypress = null;
             }
             UpdateDisplay();
+        }
+
+        private void LeftRightChecked(object sender, RoutedEventArgs e) {
+            if(this.CurrentButton == null) { return; }
+            this.CurrentButton.IsLeftRight = (bool)this.LeftRightCheckbox.IsChecked;
+            UpdateDisplay();
+        }
+
+        private void SettingsClicked(object sender, RoutedEventArgs e) {
+            var dialog = new MainSettings();
+            dialog.Owner = this;
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dialog.ShowDialog();
+        }
+
+        private void ProfileSettingsClicked(object sender, RoutedEventArgs e) {
+            if(this.Profile == null) { return; }
+            var dialog = new ProfileSettings(this.Profile);
+            dialog.Owner = this;
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dialog.ShowDialog();
         }
     }
 }

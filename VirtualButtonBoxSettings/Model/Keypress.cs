@@ -9,7 +9,7 @@ using SlimDX.DirectInput;
 
 namespace VirtualButtonBoxSettings {
     [DataContract]
-    class Keypress {
+    public class Keypress {
         [DataMember]
         public readonly Key Key;
         [DataMember]

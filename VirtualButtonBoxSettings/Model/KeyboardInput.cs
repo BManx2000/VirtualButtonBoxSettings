@@ -7,7 +7,7 @@ using SlimDX.DirectInput;
 using System.Threading;
 
 namespace VirtualButtonBoxSettings {
-    class KeyboardInput {
+    public class KeyboardInput {
         private int[] ScanCodeMap = {
             0x0B, //D0 = 0,
             0x02, //D1 = 1,
@@ -183,6 +183,7 @@ namespace VirtualButtonBoxSettings {
 
         public KeyCombo GetNextKey() {
             List<Key> pressedKeys = new List<Key>();
+            Key finalKey;
             while(true) {
                 var currentKeys = this.keyboard.GetCurrentState().PressedKeys;
                 foreach (Key key in currentKeys) {
@@ -190,11 +191,18 @@ namespace VirtualButtonBoxSettings {
                         pressedKeys.Add(key);
                     }
                 }
-                if(currentKeys.Count < pressedKeys.Count) {
-                    break;
+                foreach(Key key in pressedKeys) {
+                    if(!currentKeys.Contains<Key>(key)) {
+                        finalKey = key;
+                        goto end;
+                    }
                 }
                 Thread.Sleep(16);
             }
+            end:
+
+            pressedKeys.Remove(finalKey);
+            pressedKeys.Add(finalKey);
 
             List<Keypress> keypresses = new List<Keypress>(pressedKeys.Count);
             foreach(Key key in pressedKeys) {

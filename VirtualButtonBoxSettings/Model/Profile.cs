@@ -9,7 +9,7 @@ using System.IO;
 
 namespace VirtualButtonBoxSettings {
     [DataContract]
-    class Profile : IComparable<Profile> {
+    public class Profile : IComparable<Profile> {
         [DataMember]
         private string name;
         [DataMember]
@@ -18,6 +18,10 @@ namespace VirtualButtonBoxSettings {
         private bool isDefault;
         [DataMember]
         private bool hidePointer;
+        [DataMember]
+        private double pointerAlpha;
+        [DataMember]
+        private double controllerAlpha;
 
         [DataMember]
         public int index;
@@ -47,6 +51,22 @@ namespace VirtualButtonBoxSettings {
             }
         }
 
+        public double PointerAlpha {
+            get { return this.pointerAlpha; }
+            set {
+                this.pointerAlpha = Math.Min(Math.Max(0.0, value), 1.0);
+                Save();
+            }
+        }
+
+        public double ControllerAlpha {
+            get { return this.controllerAlpha; }
+            set {
+                this.controllerAlpha = Math.Min(Math.Max(0.0, value), 1.0);
+                Save();
+            }
+        }
+
         private void DeconflictDirectory() {
             while (Directory.Exists(Path.Combine(DirectoryInfo.FolderPath, this.directory))) {
                 this.directory += "_";
@@ -58,6 +78,8 @@ namespace VirtualButtonBoxSettings {
             this.name = "New Profile";
             this.grids = new List<ButtonGrid>();
             this.isDefault = false;
+            this.pointerAlpha = 0.5;
+            this.controllerAlpha = 0.1;
 
             this.directory = DirectoryInfo.SanitizeFilename(this.name);
             DeconflictDirectory();

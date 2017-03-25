@@ -17,7 +17,7 @@ using System.ComponentModel;
 
 namespace VirtualButtonBoxSettings {
     [DataContract]
-    class ButtonGrid {
+    public class ButtonGrid {
         [DataMember]
         private string name;
         [DataMember]

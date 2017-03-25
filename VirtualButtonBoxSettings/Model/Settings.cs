@@ -9,14 +9,16 @@ using System.IO;
 
 namespace VirtualButtonBoxSettings {
     [DataContract]
-    class Settings {
+    public class Settings {
 
         public static readonly int PixelDensity = 1500;
         private static Settings _instance;
         private static object syncRoot = new object();
 
         [DataMember]
-        private bool Lasermode;
+        public bool Lasermode;
+        [DataMember]
+        public bool OculusTouchMode;
 
         static Settings() {
             if (File.Exists(DirectoryInfo.SettingsPath)) {

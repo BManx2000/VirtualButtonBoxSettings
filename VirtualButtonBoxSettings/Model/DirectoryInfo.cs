@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace VirtualButtonBoxSettings {
-    class DirectoryInfo {
+    public class DirectoryInfo {
         public static readonly string FolderName = "Virtual Button Box";
         public static readonly string SettingsName = "settings.json";
         public static readonly string ProfileName = "profile.json";
