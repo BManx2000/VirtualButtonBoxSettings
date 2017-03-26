@@ -1,3 +1,3 @@
-**Virtual Button Box**
+This is the repository for the Virtual Button Box profiler. All the documentation is in the repository for the main program:
 
-Soon™
+https://github.com/BManx2000/VirtualButtonBox
